@@ -1,0 +1,2 @@
+ffmpeg -f image2 -r 25 -i slow%04d.png  -s 800x600 -b:v 5M  -y -an -r 25 -vcodec mpeg4 out.mp4
+ffmpeg -f image2 -r 25 -i slow%04d.png -s 800x600 -b:v 2.8M  -y -an -r 25 -vcodec h264 out.mp4
