@@ -6,7 +6,7 @@
     "scandir": "^0.1.2"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node index_1200_1000.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
