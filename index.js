@@ -41,15 +41,23 @@ function getFiles() {
             firstFrames.push(item);
         }
     });
-    //console.log(firstFrames);
 
-    firstFrames.forEach((item) => {
+    for (const item of firstFrames) {
         let itemArray = item.split('\\');
-        //console.log(itemArray);
-
         let pattern = itemArray[ itemArray.length - 1 ].replace('0001', '%04d');
-        //console.log(pattern);
 
-        exec('ffmpeg -f image2 -r 25 -i ./' + itemArray[0] + '/' + itemArray[1] + '/' + pattern + ' -s 1200x1000 -b:v 3.5M  -y -an -r 25 -vcodec h264 ./video/' + itemArray[1] + '.mp4');
-    })
+        await new Promise((resolve) => {
+            console.log('');
+            console.log('Start', itemArray[1]);
+            exec('ffmpeg -f image2 -r 25 -i ./' + itemArray[0] + '/' + itemArray[1] + '/' + pattern + ' -s 800x600 -b:v 3.5M -pix_fmt yuv420p -y -an -r 25 -vcodec h264 ./video/' + itemArray[1] + '.mp4', (err, stdout, stderr) => {
+                if (err) {
+                    console.error(err);
+                }
+                console.log('Finish', itemArray[1]);
+
+                resolve();
+            });
+        });
+        console.log('End', itemArray[1]);
+    };
 })();
